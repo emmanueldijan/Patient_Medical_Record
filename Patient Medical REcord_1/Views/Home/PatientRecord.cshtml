@@ -1,0 +1,834 @@
+﻿
+@{
+    ViewBag.Title = "PatientRecord";
+}
+
+
+<html>
+<head>
+    @*<h2>PatientRecord123</h2>*@
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/EmployeeInformation.js"></script>
+
+
+</head>
+<body>
+
+    <div class="row" id="searchgridtab" style="width:100%;">
+
+        <div id="SearcandCreateTab" class="col-sm-10" style="padding-left:15px;width:100%">
+            <div class="container" style="width: 100%;margin-top:30px;">
+                <ul class="nav nav-tabs" style="padding:3px 3px;">
+                    <li id="PatientMasterFileTab" class="active"><a data-toggle="tab" href="#PMasterTab" style="color:#000000;padding:3px 3px;width: 150px; padding-left:15px; ">Patient Master File</a></li>
+                    <li id="PatientInformationTab"><a data-toggle="tab" href="#pInfoTab" style="color:#000000;padding:3px 3px;width: 150px; padding-left:15px; ">Patient History</a></li>
+
+                </ul>
+            </div>
+            <div class="tab-content" style="margin-left:0px;">
+                <div id="PMasterTab" class="tab-pane fade in active" style="height:100%;width:100%;">
+                    <div style="padding-left:20px;">
+                        <button id="AddPatientRecord" class="btn btn-success alert-success" style="margin:10px;width:150px;">Add New Patient</button>
+
+                    </div>
+                    <div style="width:100%">
+                        <table id="MyTable" class="table table-striped table-bordered" style="width:100%;margin:20px;display:none">
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Patient Name</th>
+                                <th>Address</th>
+                                <th>Birth Date</th>
+                                <th>Age</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <table id="example" class="display" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Patient Name</th>
+                                    <th>Address</th>
+                                    <th>Birth Date</th>
+                                    <th>Age</th>
+                                    <th style="width:20px;"></th>
+                                    <th style="width:20px;"></th>
+
+
+
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+                <div id="pInfoTab" class="tab-pane fade" style="margin-top:10px;margin-left:15px;height:100%" onclick="">
+                    @*<a id="btnEditEmp" class="btn" onclick="changeState()" style="border-right:1px solid #999;">Edit Employee</a>
+                        <a id="btnSaveSearch" class="btn" style="border-right:1px solid #999;">Save Search</a>*@
+
+
+                    <div class="row">
+
+                        <div class="col-lg-4" style="padding-left:5px;padding-right:0px;width:15%;" id="searchGridResultTabs">
+                            <div style="padding:2px">
+
+                                <div id="PatientPic" style="margin-left:35px; width:200px;">
+                                    <img style="display:inline;border:1px solid #999;" src='~/Pic/Male.png' width="200" height="200" />
+                                    <br />
+                                    <span id="PatientDetails"></span>
+                                </div>
+
+                            </div>
+                            <div id="sideTab" style="background-color: cadetblue;height:556px;">
+                                <table style="width:100%">
+
+
+                                    <tr>
+                                        <td>
+                                            <div id="PatientInfoTab" style="border-bottom: solid 1px #e0e0e0;">
+                                                <a id="patientinfo" class="btn" role="button" style="width: 100%;text-align:left;color: #000000;">
+                                                    <img id="arrowEmp" style="display:inline;width:20px;height:20px;border:0px;display:none;" /><b>PATIENT INFORMATION</b>
+
+                                                </a>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div id="PatientHistoryTab" style="border-bottom: solid 1px #e0e0e0;">
+                                                <a id="patienthist" class="btn" role="button" style="width: 100%;text-align:left;color: #000000" onclick="" )">
+                                                    <img id="arrowContact" style="display:inline;width:20px;height:20px;border:0px;display:none;" src="~/Pic/arrow.png" /><b>PATIENT HISTORY</b>
+                                                </a>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div id="ConsultationTab" style="border-bottom: solid 1px #e0e0e0;">
+                                                <a id="consultation" class="btn" role="button" style="width: 100%;text-align:left;color: #000000;" onclick="" )">
+                                                    <img id="arrowOrg" style="display:inline;width:20px;height:20px;border:0px;display:none;" src="~/Pic/arrow.png" /><b>CONSULTATION</b>
+                                                </a>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div id="ImmunizationTab" style="border-bottom: solid 1px #e0e0e0;margin-bottom:10px;">
+                                                <a id="immunization" class="btn" role="button" style="width: 100%;text-align:left;color: #000000;" onclick="" )">
+                                                    <img id="arrowAD" style="display:inline;width:20px;height:20px;border:0px;display:none;" src="~/Pic/arrow.png" /><b>IMMUNIZATION</b>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-8" id="RosterHeaderTab" style="padding-left:0px;padding-right:0px;width:83%">
+                            <div>
+
+
+
+                                <ul class="nav nav-tabs" style="padding:3px;display:none;">
+                                    <li id="IdentityTab" class="active"><a id="pillEmployeeIdentity" data-toggle="tab" style="color:#000000;width: 150px; ">Identity</a></li>
+                                    <li id="EmployeeTab"><a id="pillGenInfo" data-toggle="tab" style="color:#000000;width: 150px;">Employee <span id="generalError" style="color:red;"></span></a></li>
+                                </ul>
+                                <div style="width:100%; background-color: cadetblue;padding-left:0px;padding-right:0px;max-height:100%">
+
+
+                                    <div class="container" id="divPartialViewContainer" style="background-color: cadetblue;height:800px;width:100%; overflow:auto;  ">
+                                        @Html.Partial("_PatientInfoView")
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12" style="display:none;margin-top: 10px;margin-bottom: 6px;max-width:98%;    text-align-last: right;" id="tabUpdateButton">
+                                            <input id="lblhist_ID" type="text" disabled style="display:none" />
+                                            <input id="lblimmune_ID" type="text" disabled style="display:none"/>
+
+                                            <button type="button" class="btn btn-success" style="height: 45px;width: 100px;margin-right:10px;    text-align-last: center;"
+                                                    id="btnADDHistandImmune" onclick="modalIHistandImmunetClick()">
+
+                                                <span class="glyphicon glyphicon-arrow-up"></span>
+                                                Save
+                                            </button>
+                                            @*<button id="btnEmployeeWFMSave" class="btn btn-primary">Save Skill(s)</button>*@
+                                            <button type="button" class="btn btn-danger" id="btnCancelSoap" style="height: 45px;width: 100px;    text-align-last: center;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                                Cancel
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modalAddPatientRecord" data-toggle="modal" data-backdrop="static">
+        <div class="modal-dialog" style="min-width:52%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input id="lblPatient_ID" type="text" disabled style="display:none" />
+
+                    @*<button type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true">
+            &times;
+        </button>*@
+                    <h4 class="modal-title">Add/Update Patient Information</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtFirstName" placeholder="First Name" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtLastName" placeholder="Last Name" required="required">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding:10px;">
+                                <input style="width:100%;" type="text" class="form-control" id="txtAddress" placeholder="Address" required="required">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="date" class="form-control" id="txtBirthDate" placeholder="Date Of Birth" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                @*<input style="width:300px;" type="text" class="form-control" name="Sex" placeholder="Sex" required="required">*@
+                                <select class="form-control" id="txtSex" style="width:300px;">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+
+                                </select>
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtAge" placeholder="Age" required="required">
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtPatientIDNo" placeholder="Patient ID No" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtNationality" placeholder="Nationality" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtPhoneNo" placeholder="Phone No." required="required">
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtMobileNo1" placeholder="Mobile No 1" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtMobileNo2" placeholder="Mobile No 2" required="required">
+                            </td>
+                            <td style="width:300px;padding:10px;">
+                                <input style="width:300px;" type="text" class="form-control" id="txtMobileNo3" placeholder="Mobile No 3" required="required">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-toggle="modal"
+                            data-backdrop="static"
+                            data-keyboard="false"
+                            data-target="#modalAddPatientRecord"
+                            id="btnUpdateADStatus"
+                            onclick="modalInsertPatientClick()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Update
+                    </button>
+                    <button id="btnADCancel" type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                        Cancel
+                    </button>
+                </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div class="modal fade" id="modalViewConsultationDetails" data-toggle="modal" data-backdrop="static">
+        <div class="modal-dialog" style="min-width:75%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <table>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-primary"
+                                        id="btnPROG"
+                                        onclick="ShowProgModal()">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>
+                                    PROG
+                                </button>
+                            </td>
+                            <td  style="text-align: right;width: 1300px;">
+                                <label>SOAP # </label>
+                                <label id="lblsoapno"></label><br />
+                                <label>Consultation Date :</label>
+                                <label id="lblconsultDate"></label>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="modal-body">
+                    <table  class="table table-bordered" >
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: middle;font-weight: bolder;">
+                                    Subjective 
+                                </td>
+                                <td colspan="8">
+                                    <label id="lblsubjective" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" style="vertical-align: middle;font-weight: bolder;">
+                                    Objective 
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    HEENT :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblHEENT" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Heart :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblHeart" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Lungs :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblLungs" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bolder;">
+                                    Extremities :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblExtremities" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Abdomen :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblAbdomen" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Skin :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblSkin" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bolder;">
+                                    Muskulo-Skelital :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblMSkelital" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Genito-Urinary :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblGUrinary" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Others :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblSOthers" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" style="vertical-align: middle;font-weight: bolder;">
+                                    Assesment 
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Occupational Hazzard Flags :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblOHFlags" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Diagnosis Category :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblDcategory" style="font-weight: 100;"></label>
+                                </td>
+                                <td style="font-weight: bolder;">
+                                    Diagnosis :
+                                </td>
+                                <td style="max-width: 270px;min-width:270px;">
+                                    <label id="lblDiagnosis" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bolder;">
+                                    Assesment :
+                                </td>
+                                <td colspan="7">
+                                    <label id="lblAssesment" style="font-weight: 100;"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" style="vertical-align: middle;font-weight: bolder;max-width: 24px;">
+                                    Plan:
+                                </td>
+                                <td colspan="8">
+                                    <label id="lblPlan" style="font-weight: 100;"></label>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="MyConsultasion" class="table table-striped table-bordered" style="width:97%;margin:20px;">
+                        <thead>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-primary"
+                            id="btnViewConsultationDetails">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                        Update
+                    </button>*@
+                    @*<button id="btnEmployeeWFMSave" class="btn btn-primary">Save Skill(s)</button>*@
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal"
+                            id="btnCancelViewConsult">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+                </div>
+
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div class="modal fade" id="modalADDConsultationSOAP" data-toggle="modal" data-backdrop="static">
+        <div class="modal-dialog" style="min-width:52%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label style="font-weight:bolder">ADD NEW SOAP RECORD</label>
+                </div>
+
+                <div class="modal-body">
+                    <table>
+                        <tr style="margin:20px">
+                            <td>
+                                <label style="font-weight:bolder">SUBJECTIVE:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtSubjective" name="Text1" class="form-control" cols="100" rows="4"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">HEENT:  </label>
+                                <br />
+                            </td>
+                            <td>
+                                <textarea id="txtheent" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">HEART:  </label>
+                                <br />
+
+                            </td>
+                            <td>
+                                <textarea id="txtheart" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">LUNGS:  </label>
+                                <br />
+
+                            </td>
+                            <td>
+                                <textarea id="txtlungs" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">EXTREMITIES:  </label>
+                                <br />
+
+                            </td>
+                            <td>
+                                <textarea id="txtEtremities" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">ABDOMEN:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtabdomen" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">SKIN:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtskin" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">MUSKULO-SKELETAL:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtskelital" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">GENITO-URINARY:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txturinary" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">OTHERS:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtothers" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">OCCUPATIONAL HAZZARD FLAGS:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txthazzard" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">DIAGNOSIS CATEGORY:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtDcategory" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">DIAGNOSIS:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtdiagnosis" name="Text1" class="form-control" cols="100" rows="1"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">ASSESMENT:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtassesment" name="Text1" class="form-control" cols="100" rows="4"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">PLAN:  </label>
+                            </td>
+                            <td>
+                                <textarea id="txtplan" name="Text1" class="form-control" cols="100" rows="4"></textarea>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            id="btnADDConsultationSOAP"
+                             onclick="AddUpdateSOAP()">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                        Save
+                    </button>
+                    @*<button id="btnEmployeeWFMSave" class="btn btn-primary">Save Skill(s)</button>*@
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal"
+                            id="btnCancelSoap"
+                            >
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+                </div>
+
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div class="modal fade" id="modalAddConsultationProg" data-toggle="modal" data-backdrop="static">
+        <div class="modal-dialog" style="min-width:30%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <table>
+                        <tr>
+                            <td>
+                                <label style="font-weight:900">Flags: </label>
+                            </td>
+                            
+                           
+                            <td style="padding-left:60px;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label style="font-weight:bold">Emergency:</label>
+
+                                        </td>
+                                        <td style="padding-left:30px;">
+                                            <select class="form-control Drop-Down dropdown" id="emergencyflag" required="">
+                                                <option style="  line-height: 50px; height: 50px;" value="Fetched">Fetched</option>
+                                                <option style="  line-height: 50px; height: 50px;" value="WalkIn">Walk-In</option>
+                                                <option style="  line-height: 50px; height: 50px;" value="NA">NA</option>
+                                            </select>
+                                        </td>
+                                        <td style="padding-left:60px;">
+                                            <label style="font-weight:bold">Follow up:</label>
+
+                                        </td>
+                                        <td style="padding-left:30px;">
+                                            <select class="form-control Drop-Down dropdown" id="PFollowUpflag" required="">
+                                                <option style="  line-height: 50px; height: 50px;" value=true>Yes</option>
+                                                <option style="  line-height: 50px; height: 50px;" value=false>No</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </td>
+                        </tr>
+
+                        
+                    </table>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Blood Pressure:  </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[90-200 / 60-170]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="progBP" type="text" style="width:80%" name="Pflags" class="form-control"placeholder="mm/Hg" value=""><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">mm/Hg</label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Pulse Rate:  </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[50-120]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgPR" type="text" name="Pflags" style="width:80%" class="form-control" value="0"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">bpm</label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Temperature: </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[36-40]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgTemp" type="text" name="Pflags" style="width:80%" class="form-control" value="0"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">C</label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Respiratory Rate: </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[16-30]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgRR" type="text" name="Pflags" style="width:80%" class="form-control" value=""><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">min</label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Weight: </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[70-400]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgLB" type="text" name="Pflags" style="width:80%" class="form-control" placeholder="Pounds" oninput="weightlConverter_LBK(this.value)"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">lb =</label>
+
+                            </td>
+                            <td>
+                                <input id="ProgW" type="text" name="Pflags" style="width:80%" class="form-control" placeholder="Kilograms" oninput="weightConverter_KLB(this.value)"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">kg  </label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Height: </label>
+                                <br />
+                                <label style="font-weight:100;font-size:small;margin:0px">[3-10]  </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgFT" type="text" name="Pflags" style="width:80%" class="form-control"  placeholder="Feet" oninput="LengthConverter_FTtoIncCM(this.value)"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">ft</label>
+
+                            </td>
+                            <td>
+                                <input id="ProgInc" type="text" name="Pflags"  style="width:80%"class="form-control" placeholder="Inches" oninput="LengthConverter_InctoFTCM(this.value)"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder;width: 30px;">in =</label>
+
+                            </td>
+                            <td>
+                                <input id="ProgCM" type="text" name="Pflags"  style="width:80%"class="form-control" placeholder="Centemiter" oninput="LengthConverter_CMtoFTInc(this.value)"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">cm</label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder">Body Mass Index: </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <input id="ProgBMI" type="text" name="Pflags" style="width:80%" class="form-control" value="0"><br>
+
+                            </td>
+                            <td>
+                                <label style="font-weight:bolder">lb/ft</label>
+
+                            </td>
+                        </tr>
+                       
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <table style="padding-bottom:30px;">
+                        <tr>
+                            <td>
+                                <label style="font-weight:bolder;">Notes: </label>
+                            </td>
+                            <td style="padding-left:10px;">
+                                <textarea id="txtProgNote" name="Text1" class="form-control" cols="50" rows="5"></textarea>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="button" class="btn btn-primary"
+                            id="btnAddConsultationProg"
+                            onclick="AddUpdateProgress()"
+                            style="margin-top: 10px;">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                        Update
+                    </button>
+                    @*<button id="btnEmployeeWFMSave" class="btn btn-primary">Save Skill(s)</button>*@
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal"
+                            id="btnCancelProg"
+                            style="margin-top: 10px;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+                </div>
+
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+
+</body>
+</html>
+
